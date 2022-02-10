@@ -1,2 +1,0 @@
-# U3ROFSOSGyak
-# U3ROFSOsGyak
