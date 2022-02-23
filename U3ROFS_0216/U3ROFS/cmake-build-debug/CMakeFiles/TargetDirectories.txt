@@ -1,0 +1,3 @@
+C:/Users/Máté/CLionProjects/U3ROFS/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Máté/CLionProjects/U3ROFS/cmake-build-debug/CMakeFiles/U3ROFS.dir
+C:/Users/Máté/CLionProjects/U3ROFS/cmake-build-debug/CMakeFiles/edit_cache.dir
