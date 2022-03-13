@@ -6,7 +6,7 @@ int main()
 {
     for(int i = 0; i < 10; i++)
     {
-        printf("Stremler Laszlo - AQYO8L\n");
+        printf("Nagy Máté - U3ROFS\n");
     }
 
     return 0;
