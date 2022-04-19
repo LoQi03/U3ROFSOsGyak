@@ -42,5 +42,5 @@ void InterruptHandler(int sig)
 void QuitHandler(int sig)
 {
     printf("SIGQUIT signal: %d\n",sig);
-    interrupts=2;
+    interrupts++;
 }
