@@ -1,156 +1,66 @@
-#include <sys/wait.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-
-int main() {
-    int id1 = fork();
-    if(id1 == 0)
+#include<stdio.h>
+#include<sys/types.h>
+#include<unistd.h>
+#include<sys/wait.h>
+int main(){
+    int id1, id2;
+    int statusz;
+    int st;
+    id1=fork();
+    id2=fork();
+    if(id1==0)
     {
-        /*Első gyerek*/
-        int id2 = fork();
-        if(id2 == 0)
+        printf("A gyerekben vagyok %d\n",getpid());
+        int idu1=fork();
+        int idu2=fork();
+        int idu3=fork();
+        if(idu1==0)
         {
-            /*Masoidik gyerek*/
-            int id3=fork();
-            if(id3 == 0)
-            {
-                /*Harmadik gyerek*/
-                printf("A harmadik gyerek(%d) vagyok várok 3 secet!\n",getpid());
-                sleep(3);
-            }
-            else
-            {
-                /*Harmadik szülő*/
-                int status;
-                if(waitpid(id3,&status,0) == -1)
-                {
-                    perror("waitpid failed");
-                    return EXIT_FAILURE;
-                }
-                if( WIFEXITED(status))
-                {
-                    printf("A harmadik szülő vagyok, mivel meghalt a gyerekem (%d) ezért megölöm magam!\n",id3);
-                }
-            }
-            printf("A második gyerek(%d) vagyok várok 3 secet!\n",getpid());
-            sleep(3);    
-        }
-        else
-        {
-            /*Masoidik szülő*/
-            int id3=fork();
-            if(id3 == 0)
-            {
-                /*Harmadik gyerek*/
-                printf("A harmadik gyerek(%d) vagyok várok 3 secet!\n",getpid());
-                sleep(3);
-            }
-            else
-            {
-                /*Harmadik szülő*/
-                int status;
-                if(waitpid(id3,&status,0) == -1)
-                {
-                    perror("waitpid failed");
-                    return EXIT_FAILURE;
-                }
-                if(WIFEXITED(status))
-                {
-                   printf("A harmadik szülő vagyok, mivel meghalt a gyerekem (%d) ezért megölöm magam!\n",id3);
-                }
-            }
-            int status;
-            if(waitpid(id2,&status,0) == -1)
-            {
-                perror("waitpid failed");
-                return EXIT_FAILURE;
-            }
-            if( WIFEXITED(status))
-            {
-                printf("A második szülő vagyok, mivel meghalt a gyerekem (%d) ezért megölöm magam!\n",id2);
-            }
-        }
-        printf("Az első gyerek(%d) vagyok várok 3 secet!\n",getpid());
-        sleep(3); 
-    }
-    else
-    {
-        /*Első szülő*/
-        int id2 = fork();
-        if(id2 == 0)
-        {
-            /*Masoidik gyerek*/
-            int id3=fork();
-            if(id3 == 0)
-            {
-                /*Harmadik gyerek*/
-                printf("A harmadik gyerek(%d) vagyok várok 3 secet!\n",getpid());
-                sleep(3);
-            }
-            else
-            {
-                /*Harmadik szülő*/
-                int status;
-                if(waitpid(id3,&status,0) == -1)
-                {
-                    perror("waitpid failed");
-                    return EXIT_FAILURE;
-                }
-                if( WIFEXITED(status))
-                {
-                    printf("A harmadik szülő vagyok, mivel meghalt a gyerekem (%d) ezért megölöm magam!\n",id3);
-                }
-            }
-            printf("A második gyerek(%d) vagyok várok 3 secet!\n",getpid());
+            printf("Várok 3 mp-t %d \n", getpid());
             sleep(3);
         }
-        else
+        if(idu2==0)
         {
-             /*Masoidik szülő*/
-            int id3=fork();
-            if(id3 == 0)
-            {
-                /*Harmadik gyerek*/
-                printf("A harmadik gyerek(%d) vagyok várok 3 secet!\n",getpid());
-                sleep(3);
-            }
-            else
-            {
-                /*Harmadik szülő*/
-                int status;
-                if(waitpid(id3,&status,0) == -1)
-                {
-                    perror("waitpid failed");
-                    return EXIT_FAILURE;
-                }
-                if( WIFEXITED(status))
-                {
-                    printf("A harmadik szülő vagyok, mivel meghalt a gyerekem (%d) ezért megölöm magam!\n",id3);
-                }
-            }
-            int status;
-            if(waitpid(id2,&status,0) == -1)
-            {
-                perror("waitpid failed");
-                return EXIT_FAILURE;
-            }
-            if( WIFEXITED(status))
-            {
-                printf("A második szülő vagyok, mivel meghalt a gyerekem (%d) ezért megölöm magam!\n",id2);
-            }
+            printf("Várok 3 mp-t %d\n", getpid());
+            sleep(3);
         }
-        int status;
-        if(waitpid(id1,&status,0) == -1)
+        if(idu3==0)
         {
-            perror("waitpid failed");
-            return EXIT_FAILURE;
-        }
-        if( WIFEXITED(status))
-        {
-            printf("Az első szülő vagyok, mivel meghalt a gyerekem (%d) ezért megölöm magam!\n",id1);
+            printf("Várok 3 mp-t %d\n",getpid());
+            sleep(3);
         }
     }
-        
+    else{
+        wait(&st);
+        wait(&st);
+        wait(&st);
+    }
+    if(id2==0)
+    {
+        printf("Szülőben vagyok! %d\n", getpid());
+        int idu1=fork();
+        int idu2=fork();
+        int idu3=fork();
+        if(idu1==0)
+        {
+            printf("Várok 3 mp-t  %d\n", getpid());
+            sleep(3);
+        }
+        if(idu2==0)
+        {
+            printf("Várok 3 mp-t %d\n ", getpid());
+            sleep(3);
+        }
+        if(idu3==0)
+        {
+            printf("Várok 3 mp-t %d\n", getpid());
+            sleep(3);
+        }
+    }
+    else{
+        wait(&st);
+        wait(&st);
+        wait(&st);
+    }
+    return 0;
 }
