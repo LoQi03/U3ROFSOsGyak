@@ -7,60 +7,72 @@ int main(){
     int statusz;
     int st;
     id1=fork();
-    id2=fork();
     if(id1==0)
     {
-        printf("A gyerekben vagyok %d\n",getpid());
+        //a gyerekben vagyok
         int idu1=fork();
-        int idu2=fork();
-        int idu3=fork();
         if(idu1==0)
         {
             printf("Várok 3 mp-t %d \n", getpid());
             sleep(3);
         }
+        else
+        {
+        wait(&st);
+        }
+        int idu2=fork();
         if(idu2==0)
         {
-            printf("Várok 3 mp-t %d\n", getpid());
+            printf("Várok 3 mp-t %d \n", getpid());
             sleep(3);
         }
+        else
+        {
+        wait(&st);
+        }
+        int idu3=fork();
         if(idu3==0)
         {
-            printf("Várok 3 mp-t %d\n",getpid());
+            printf("Várok 3 mp-t %d \n", getpid());
             sleep(3);
+        }
+        else
+        {
+        wait(&st);
         }
     }
     else{
-        wait(&st);
-        wait(&st);
-        wait(&st);
-    }
-    if(id2==0)
-    {
-        printf("Szülőben vagyok! %d\n", getpid());
+        //szülőben vagyok
         int idu1=fork();
-        int idu2=fork();
-        int idu3=fork();
         if(idu1==0)
         {
-            printf("Várok 3 mp-t  %d\n", getpid());
+            printf("Várok 3 mp-t %d \n", getpid());
             sleep(3);
         }
+        else
+        {
+        wait(&st);
+        }
+        int idu2=fork();
         if(idu2==0)
         {
-            printf("Várok 3 mp-t %d\n ", getpid());
+            printf("Várok 3 mp-t %d \n", getpid());
             sleep(3);
         }
+        else
+        {
+        wait(&st);
+        }
+        int idu3=fork();
         if(idu3==0)
         {
-            printf("Várok 3 mp-t %d\n", getpid());
+            printf("Várok 3 mp-t %d \n", getpid());
             sleep(3);
         }
-    }
-    else{
+        else
+        {
         wait(&st);
-        wait(&st);
-        wait(&st);
+        }
     }
     return 0;
 }
